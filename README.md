@@ -1,6 +1,6 @@
 # My Graduation of Reasoning WorkFlow Demo Building Guidance
 
-**See Complete Guidance [Here](README_Guidance.md)**
+**See Complete Official Guidance [Here](README_Guidance.md)**
 
 **Host:http://host.docker.internal (To use local api)**
 
