@@ -1,0 +1,315 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Brench Test
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai_api_compatible:0.0.7@f20c7275bbcf055ec5d170dd5128e341986e2dcba5266d08fd080d4bdf2288f6
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1741174335723-source-1741175529414-target
+      selected: false
+      source: '1741174335723'
+      sourceHandle: source
+      target: '1741175529414'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1741175529414-1-1741246062616-target
+      selected: false
+      source: '1741175529414'
+      sourceHandle: '1'
+      target: '1741246062616'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1741246062616-source-1741177757434-target
+      source: '1741246062616'
+      sourceHandle: source
+      target: '1741177757434'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1741175529414-2-1741246898981-target
+      source: '1741175529414'
+      sourceHandle: '2'
+      target: '1741246898981'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1741246898981-source-1741246968427-target
+      source: '1741246898981'
+      sourceHandle: source
+      target: '1741246968427'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: user_prompt
+          max_length: 4096
+          options: []
+          required: true
+          type: paragraph
+          variable: question
+      height: 90
+      id: '1741174335723'
+      position:
+        x: 80.97676125594239
+        y: 282
+      positionAbsolute:
+        x: 80.97676125594239
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        classes:
+        - id: '1'
+          name: 普通问题
+        - id: '2'
+          name: 推理问题
+        desc: ''
+        instruction: '普通问题是指不需要过多思考即可回答的问题。例如你好
+
+          推理问题包括一切数学代码问题，以及需要深度思考解决的问题。例如加减法
+
+          '
+        instructions: ''
+        model:
+          completion_params:
+            max_tokens: 512
+            temperature: 0.7
+          mode: chat
+          name: Brench-Reasoning
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        query_variable_selector:
+        - '1741174335723'
+        - question
+        selected: true
+        title: 问题分类器
+        topics: []
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 168
+      id: '1741175529414'
+      position:
+        x: 390.08781693757396
+        y: 282
+      positionAbsolute:
+        x: 390.08781693757396
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1741246062616'
+          - text
+          variable: text
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1741177757434'
+      position:
+        x: 1172.70083234934
+        y: 282
+      positionAbsolute:
+        x: 1172.70083234934
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            frequency_penalty: 0
+            presence_penalty: 0
+            temperature: 0.7
+            top_p: 1
+          mode: chat
+          name: Brench-General
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: aee38265-5c32-4059-b571-1e33e64ef7a5
+          role: system
+          text: '你的名字叫Brench-AI,是由Brench创造出的世界知识型AI助手,具备一定的分析能力 你会以平等、友好的交流态度与用户交流,
+            帮助用户进行文章撰写、知识科普等普通问答任务
+
+
+            现在请你根据用户的问题进行回复
+
+
+            {{#1741174335723.question#}}'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1741246062616'
+      position:
+        x: 834.7414377932768
+        y: 282
+      positionAbsolute:
+        x: 834.7414377932768
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: Brench-Reasoning
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 7e822248-af30-4e1c-a987-0770d04600c0
+          role: system
+          text: 请解决这个问题{{#1741174335723.question#}}
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1741246898981'
+      position:
+        x: 798.6012713234087
+        y: 403.18590995246086
+      positionAbsolute:
+        x: 798.6012713234087
+        y: 403.18590995246086
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1741246898981'
+          - text
+          variable: text
+        selected: false
+        title: 结束 3
+        type: end
+      height: 90
+      id: '1741246968427'
+      position:
+        x: 1138.7414377932769
+        y: 411
+      positionAbsolute:
+        x: 1138.7414377932769
+        y: 411
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -402.19000704364726
+      y: -107.93003465414074
+      zoom: 1.3523570230262518
