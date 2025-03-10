@@ -11,7 +11,7 @@
 - User Query + Problem Classifier + Reasoning LLM -----> Response
 
 **Problem Classifier is based on** :
-- My Private Model 
+- Open Source Model + SFT
 - Open API Model (Better instruction following ability and breadth of knowledge)
 
 
@@ -20,5 +20,4 @@
 - System Prompt + Reasoning LLM + Context
 
 ## Reasoning ChatFlow
-
 - TODO
